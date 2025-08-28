@@ -1,0 +1,24 @@
+/* Minimal App.css for dev server to serve.
+   Keeps webpack dev server from returning HTML for /App.css requests.
+*/
+:root {
+  --auto-cloze-accent: #3b82f6;
+}
+body {
+  margin: 0;
+  font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;
+}
+.plugin-root {
+  padding: 8px;
+}
+
+/* Small helpers used by the widget */
+.autocloze-button {
+  background: var(--auto-cloze-accent);
+  color: white;
+  border: none;
+  padding: 6px 10px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+.autocloze-error { color: #b91c1c; }

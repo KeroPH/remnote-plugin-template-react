@@ -1,9 +1,10 @@
 {
   "manifestVersion": 1,
-  "id": "plugin_template",
-  "name": "Plugin Template",
-  "author": "remnote",
-  "repoUrl": "",
+  "id": "auto_cloze",
+  "name": "AutoCloze",
+  "author": "keroph",
+  "repoUrl": "https://github.com/keroph/auto-cloze",
+  
   "version": {
     "major": 0,
     "minor": 0,

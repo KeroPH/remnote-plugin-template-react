@@ -1,42 +1,38 @@
 import { declareIndexPlugin, type ReactRNPlugin, WidgetLocation } from '@remnote/plugin-sdk';
 import '../style.css';
-import '../index.css'; // import <widget-name>.css
 
 async function onActivate(plugin: ReactRNPlugin) {
-  // Register settings
-  await plugin.settings.registerStringSetting({
-    id: 'name',
-    title: 'What is your Name?',
-    defaultValue: 'Bob',
-  });
+  // Register the Selected Text widget
+  await plugin.app.registerWidget(
+    'selected_cloze',
+    WidgetLocation.SelectedTextMenu,
+    {
+      dimensions: { height: 'auto', width: '100%' },
+      widgetTabIcon: 'https://cdn-icons-png.flaticon.com/512/164/164615.png',
+      widgetTabTitle: 'AutoCloze',
+    }
+  );
+  await plugin.app.registerWidget(
+    'autocloze_sidebar',
+    WidgetLocation.SidebarEnd,
+    {
+      dimensions: { height: 'auto', width: 'auto' },
+      widgetTabTitle: 'AutoCloze',
+    }
+  );
 
-  await plugin.settings.registerBooleanSetting({
-    id: 'pizza',
-    title: 'Do you like pizza?',
-    defaultValue: true,
+  // Settings (API Key + max clozes)
+  await plugin.settings.registerStringSetting({
+    id: 'openai_api_key',
+    title: 'OpenAI API Key',
+    description: 'Paste your OpenAI API key here.',
   });
 
   await plugin.settings.registerNumberSetting({
-    id: 'favorite-number',
-    title: 'What is your favorite number?',
-    defaultValue: 42,
-  });
-
-  // A command that inserts text into the editor if focused.
-  await plugin.app.registerCommand({
-    id: 'editor-command',
-    name: 'Editor Command',
-    action: async () => {
-      plugin.editor.insertPlainText('Hello World!');
-    },
-  });
-
-  // Show a toast notification to the user.
-  await plugin.app.toast("I'm a toast!");
-
-  // Register a sidebar widget.
-  await plugin.app.registerWidget('sample_widget', WidgetLocation.RightSidebar, {
-    dimensions: { height: 'auto', width: '100%' },
+    id: 'max_clozes',
+    title: 'Max Clozes',
+    description: 'Maximum number of cloze deletions to generate.',
+    defaultValue: 3,
   });
 }
 
